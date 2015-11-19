@@ -23,6 +23,7 @@ push: function(value){
 pop: function(){
   if (this.count) {
     this.count -=1;
+    delete this.count[this.count];
 
   }
 }
