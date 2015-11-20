@@ -2,15 +2,27 @@ var LinkedList = function(){
   var list = {};
   list.head = null;
   list.tail = null;
+  headCounter = 0;
+  tailCounter = 0;
 
 
   list.addToTail = function(value){
-    if (list.head){
-      list.tail = linkedListNode(value);
+    tailCounter +=1;
+    //if case is where the list has 1 or more things in it
+    if (list.tail){
+      //capture former tail
+
+      list.tail.next = linkedListNode(value);
+      //update the former next value to point to the new tail
+
+
     }
+    //else case is the list has 0 things in it
     else {
       list.head = linkedListNode(value);
       list.tail = list.head;
+      list.head.next = list.tail;
+      headCounter +=1;
     }
   };
 
@@ -20,9 +32,11 @@ var LinkedList = function(){
 // go to the next node (node.next)
 // reassign (node.next) to be list.head
 // return former head
-   var formerHead = list.head;
-   list.head = formerHead.next;
-   return formerHead.value;
+    if (list.head){
+      var formerHead = list.head;
+      list.head = formerHead.next;
+      return formerHead.value;
+    }
   };
 
   list.contains = function(target){
