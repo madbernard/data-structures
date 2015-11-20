@@ -9,7 +9,24 @@ var Queue = function(){
 };
 
 var queueMethods = {
-  size : //
+  size : function(){
+    return this.sizeCounter;
+  },
+
+  enqueue : function(value) {
+    this.storage[this.count] = value;
+    this.count += 1;
+    this.sizeCounter += 1;
+  },
+
+  dequeue : function() {
+    if (this.sizeCounter) {
+      var results = this.storage[this.count - this.sizeCounter];
+      delete this.storage[this.count - this.sizeCounter];
+      this.sizeCounter -= 1;
+      return results;
+    }
+  }
 };
 
 
