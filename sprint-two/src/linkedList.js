@@ -10,49 +10,48 @@ var LinkedList = function(){
     tailCounter +=1;
     //if case is where the list has 1 or more things in it
     if (list.tail){
-      //capture former tail
-
-      list.tail.next = linkedListNode(value);
       //update the former next value to point to the new tail
-
-
+      list.tail.next = linkedListNode(value);
+      //assign the new tail ! BAM!
+      list.tail = list.tail.next;
     }
     //else case is the list has 0 things in it
     else {
       list.head = linkedListNode(value);
       list.tail = list.head;
-      list.head.next = list.tail;
-      headCounter +=1;
+      headCounter += 1;
     }
   };
 
   list.removeHead = function(){
 
-// save the current value of the head as formerhead
-// go to the next node (node.next)
-// reassign (node.next) to be list.head
-// return former head
+    // save the current value of the head as formerhead
+    // go to the next node (node.next)
+    // reassign (node.next) to be list.head
+    // return former head
     if (list.head){
       var formerHead = list.head;
       list.head = formerHead.next;
+      // counters?
       return formerHead.value;
     }
   };
 
   list.contains = function(target){
-    // loop on the entire list comparying values
-    // for loop without i
-    //first part is starting position
-    //middle part is position at which it is thrown out
-    //last part is how it advances
+    // set up a temp variable that points to the head
+    // set up a while loop (while we are traversing the collection of nodes
+    // i.e we are nto at the end...)
+    // return true if the value in that temp matches target.
+    // else, return false when temp has hit the tail or there are no nodes (temp = null).
 
-    for ( var x = list.head.value; list.tail.next === null; list.head.next = list.tail) {
-      if ( x === target){
+    var temp = list.head;
+    while ( temp ) {
+      if (temp.value === target) {
         return true;
       }
-      else return false;
+      temp = temp.next;
     }
-
+    return false;
   };
 
   return list;
