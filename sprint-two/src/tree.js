@@ -13,7 +13,6 @@ var treeMethods = {};
 treeMethods.addChild = function(value){
   //assign the Tree(value) just like the newTree in the constructor did
   this.children.push(Tree(value));   //calling the constructor again to assign value
-  this.counter +=1;
 };
 
 treeMethods.contains = function(target){
