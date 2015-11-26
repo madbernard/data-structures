@@ -36,8 +36,15 @@ Graph.prototype.removeNode = function(node){
 };
 
 // ------------------------
-// Returns a boolean indicating whether two specified nodes are connected.  Pass in the values contained in each of the two nodes.
+// Returns a boolean indicating whether two specified nodes are connected.
+// Pass in the values contained in each of the two nodes.
 Graph.prototype.hasEdge = function(fromNode, toNode){
+  for (var i = 0; i < this.nodes.length; i++) {
+    if (this.nodes[i].name === fromNode && this.nodes[i].connections.toNode === toNode) {
+      return true;
+    }
+  }
+  return false;
 };
 
 // ------------------------
@@ -46,6 +53,7 @@ Graph.prototype.addEdge = function(fromNode, toNode){
   var fromNodeIndex = null;
   var toNodeIndex = null;
 
+  // check that both fromNode and toNode exist, set up for insertion
   for (var i = 0; i < this.nodes.length; i++) {
     if (this.nodes[i].name === fromNode) {
       fromNodeIndex = i;
@@ -56,8 +64,8 @@ Graph.prototype.addEdge = function(fromNode, toNode){
   }
 
   if (fromNodeIndex && toNodeIndex) {
-    this.nodes[fromNodeIndex].connections.toNode = toNode;
-    this.nodes[toNodeIndex].connections.fromNode = fromNode;
+    this.nodes[fromNodeIndex].connections = {toNode: toNode};
+    this.nodes[toNodeIndex].connections = {fromNode: fromNode};
   }
 };
 
