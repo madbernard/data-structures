@@ -10,7 +10,7 @@ var Graph = function(){
 // ------------------------
 // Add a node to the graph, passing in the node's value.
 Graph.prototype.addNode = function(node){
-  this.nodes.push({name: node});
+  this.nodes.push({name: node, connections: null});
 };
 
 // ------------------------
@@ -26,7 +26,13 @@ Graph.prototype.contains = function(node){
 
 // ------------------------
 // Removes a node from the graph.
+// if this.nodes was an object...  this wouldn't be 2x O(N).  Worth it to lose array's fine aspects?
 Graph.prototype.removeNode = function(node){
+  for (var i = 0; i < this.nodes.length; i++) {
+    if (this.nodes[i].name === node) {
+      this.nodes.splice(i, 1);
+    }
+  }
 };
 
 // ------------------------
@@ -37,6 +43,22 @@ Graph.prototype.hasEdge = function(fromNode, toNode){
 // ------------------------
 // Connects two nodes in a graph by adding an edge between them.
 Graph.prototype.addEdge = function(fromNode, toNode){
+  var fromNodeIndex = null;
+  var toNodeIndex = null;
+
+  for (var i = 0; i < this.nodes.length; i++) {
+    if (this.nodes[i].name === fromNode) {
+      fromNodeIndex = i;
+    }
+    if (this.nodes[i].name === toNode) {
+      toNodeIndex = i;
+    }
+  }
+
+  if (fromNodeIndex && toNodeIndex) {
+    this.nodes[fromNodeIndex].connections.toNode = toNode;
+    this.nodes[toNodeIndex].connections.fromNode = fromNode;
+  }
 };
 
 // ------------------------
@@ -46,7 +68,11 @@ Graph.prototype.removeEdge = function(fromNode, toNode){
 
 // ------------------------
 // Pass in a callback which will be executed on each node of the graph.
+// this may work but it depends on addEdge and hasEdge to test it
 Graph.prototype.forEachNode = function(cb){
+  _.each(this.nodes, function(node){
+    cb(node);
+  });
 };
 
 /*
