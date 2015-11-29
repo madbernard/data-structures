@@ -10,7 +10,7 @@ var Graph = function(){
 // ------------------------
 // Add a node to the graph, passing in the node's value.
 Graph.prototype.addNode = function(node){
-  this.nodes.node = {
+  this.nodes[node] = {
     name: node,
     connections: {}
   };
@@ -19,14 +19,14 @@ Graph.prototype.addNode = function(node){
 // ------------------------
 // Return a boolean value indicating if the value passed to contains is represented in the graph.
 Graph.prototype.contains = function(node){
-  return !!this.nodes.node;
+  return !!this.nodes[node];
 };
 
 // ------------------------
 // Removes a node from the graph.
 Graph.prototype.removeNode = function(node){
-  if (!!this.nodes.node) {
-    delete this.nodes.node;
+  if (!!this.nodes[node]) {
+    delete this.nodes[node];
   }
 };
 
@@ -34,33 +34,15 @@ Graph.prototype.removeNode = function(node){
 // Returns a boolean indicating whether two specified nodes are connected.
 // Pass in the values contained in each of the two nodes.
 Graph.prototype.hasEdge = function(fromNode, toNode){
-  for (var i = 0; i < this.nodes.length; i++) {
-    if (this.nodes[i].name === fromNode && this.nodes[i].connections.toNode === toNode) {
-      return true;
-    }
-  }
-  return false;
+  return !!this.nodes[fromNode].connections.toNode && !!this.nodes[toNode].connections.fromNode;
 };
 
 // ------------------------
 // Connects two nodes in a graph by adding an edge between them.
 Graph.prototype.addEdge = function(fromNode, toNode){
-  var fromNodeIndex = null;
-  var toNodeIndex = null;
-
-  // check that both fromNode and toNode exist, set up for insertion
-  for (var i = 0; i < this.nodes.length; i++) {
-    if (this.nodes[i].name === fromNode) {
-      fromNodeIndex = i;
-    }
-    if (this.nodes[i].name === toNode) {
-      toNodeIndex = i;
-    }
-  }
-
-  if (fromNodeIndex && toNodeIndex) {
-    this.nodes[fromNodeIndex].connections = {toNode: toNode};
-    this.nodes[toNodeIndex].connections = {fromNode: fromNode};
+  if (!!this.nodes[fromNode] && !!this.nodes[toNode]) {
+    this.nodes[fromNode].connections = {toNode: toNode};
+    this.nodes[toNode].connections = {fromNode: fromNode};
   }
 };
 
