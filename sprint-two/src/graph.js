@@ -4,13 +4,16 @@
 
 // Instantiate a new graph
 var Graph = function(){
-  this.nodes = [];
+  this.nodes = {};
 };
 
 // ------------------------
 // Add a node to the graph, passing in the node's value.
 Graph.prototype.addNode = function(node){
-  this.nodes.push({name: node, connections: null});
+  nodes.node = {
+    name: node,
+    connections: {}
+  };
 };
 
 // ------------------------
