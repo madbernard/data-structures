@@ -64,7 +64,7 @@ Graph.prototype.removeEdge = function(fromNode, toNode){
 // this may work but it depends on addEdge and hasEdge to test it
 Graph.prototype.forEachNode = function(cb){
   _.each(this.nodes, function(node){
-    cb(node);
+    cb(node.name);
   });
 };
 
