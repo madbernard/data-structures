@@ -10,7 +10,7 @@ var Graph = function(){
 // ------------------------
 // Add a node to the graph, passing in the node's value.
 Graph.prototype.addNode = function(node){
-  nodes.node = {
+  this.nodes.node = {
     name: node,
     connections: {}
   };
@@ -19,22 +19,14 @@ Graph.prototype.addNode = function(node){
 // ------------------------
 // Return a boolean value indicating if the value passed to contains is represented in the graph.
 Graph.prototype.contains = function(node){
-  for (var i = 0; i < this.nodes.length; i++) {
-    if (this.nodes[i].name === node) {
-      return true;
-    }
-  }
-  return false;
+  return !!this.nodes.node;
 };
 
 // ------------------------
 // Removes a node from the graph.
-// if this.nodes was an object...  this wouldn't be 2x O(N).  Worth it to lose array's fine aspects?
 Graph.prototype.removeNode = function(node){
-  for (var i = 0; i < this.nodes.length; i++) {
-    if (this.nodes[i].name === node) {
-      this.nodes.splice(i, 1);
-    }
+  if (!!this.nodes.node) {
+    delete this.nodes.node;
   }
 };
 
