@@ -24,6 +24,16 @@ var LinkedList = function(){
   };
 
   list.contains = function(target){
+    // loop over list
+    // for loop structure: first bit is start
+    // second bit is place where thrown out of loop
+    // third bit is what to do at the end of each loop step
+    for (var i = list.head; i !== null; i = i.next) {
+      if (i.value === target) {
+        return true;
+      }
+    }
+    return false;
   };
 
   return list;
