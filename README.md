@@ -1,6 +1,6 @@
 # data-structures
 
-This is a project I worked on as a student at Hack Reactor, with [](), and alone. The project implements in javascript the following data-structures:
+This is a project I worked on as a student at Hack Reactor, with [@TheBecky](https://github.com/TheBecky), and alone. The project implements in javascript the following data-structures:
 
 ## Data structures:
 
